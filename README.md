@@ -1,9 +1,9 @@
 # 0x15. C - Simple Shell
 
 ## Authors
-[Martin Smith](http://www.github.com/Ostoyae) [![alt text]][1.1][1]
+[Martin Smith](http://www.github.com/Ostoyae) [![alt text][1.1]][1]
 
-[Susan Su](http://www.github.com/suhearsawho) [![alt text]][1.1][2]
+[Susan Su](http://www.github.com/suhearsawho) [![alt text][1.1]][2]
 
 ## Table of Context
 
@@ -46,11 +46,13 @@ Files |Description
      
 
 [_page top_](#0x15-c---simple-shell)
+
 ---
 
 ## Acknowledgments
 
 [_page top_](#0x15-c---simple-shell)
+
 ---
 <!-- icon with padding -->
 [1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
