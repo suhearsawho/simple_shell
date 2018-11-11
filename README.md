@@ -25,7 +25,7 @@ This is a collaborative project to recreate a simple shell in `C` using what we'
 
 
 <details>
-<summary><h4>List of allowed functions and system calls</h4></summary>
+<summary>List of allowed functions and system calls</summary>
 
 * access (man 2 access)
 * chdir (man 2 chdir)
