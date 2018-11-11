@@ -16,7 +16,7 @@
 
 ## Introduction
 
-This is a collaborative project to recreate a simple shell in `C` using what we've learn up till now. While we can use fair amount of pre-existing function to build our shell. Some optional advance task are to rewrite then. 
+This is a collaborative project to recreate a simple shell in C using what we've learned up until now. While we can use a fair amount of pre-existing function to build our shell, some optional advance task is to rewrite them.
 
 [_page top_](#0x15-c---simple-shell)
 
