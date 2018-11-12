@@ -8,9 +8,11 @@ typedef struct cmds {
 } cmd_t;
 
 typedef struct cmd_input {
-	struct *cmd_input;
+	struct cmd_input *input;
 	char *str;
 } input_t;
+
+extern char *environ;
 
 /* header files */
 #include <sys/types.h>
@@ -28,6 +30,8 @@ size_t _strlen(char *);
 
 /* prompt_util.c */
 void print_ps1(void);
+char *find_pathname(char **, char *);
+char *_getenv(const char *);
 
 /* function prototypes */
 char *_strtok(char *, const char *);
