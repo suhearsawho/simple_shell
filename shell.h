@@ -15,4 +15,16 @@ typedef struct cmds {
 #include <fcntl.h>
 #include <string.h>
 
+/* Susan's Additions */
+
+
+
+
+/* Martin's Additions */
+ssize_t _getline(char **, size_t *, FILE *);
+
+
+
+
+
 #endif
