@@ -44,6 +44,23 @@ char *_strdup(char *s)
 }
 
 /**
+  * _strcmp - compares two strings
+  * @str1: first string
+  * @str2: second string
+  * Return: 0 if they are equal, 1 if not equal
+  */
+int _strcmp(char *str1, char *str2)
+{
+	while (*str1 != '\0' && *str2 != '\0')
+	{
+		if (*str1++ != *str2++)
+			return (1);
+	}
+	if (*str1 == '\0' && *str2 == '\0')
+		return (0);
+	return (1);
+}
+/**
  * get_path - get the env path and tokenizes it into a array.
  * @env: string of a path.
  *

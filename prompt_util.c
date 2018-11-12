@@ -36,7 +36,7 @@ char *find_pathname(char **path, char *input)
 		while ((filename = readdir(directory)) != NULL)
 		{
 			/* TODO make strcmp function */
-			str_cmp = strcmp(filename->d_name, input);
+			str_cmp = _strcmp(filename->d_name, input);
 			if (str_cmp == 0)
 			{
 				match_found = 1;

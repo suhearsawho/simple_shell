@@ -19,6 +19,7 @@ size_t _strlen(char *);
 char *_strdup(char *);
 char **get_path(char *env);
 char **tokenize_str(char *str, char *delim);
+int _strcmp(char *, char *);
 
 /* prompt_util.c */
 void print_ps1(void);
