@@ -12,11 +12,7 @@ size_t _strlen(char *str)
 	size_t num_char;
 
 	num_char = 0;
-<<<<<<< HEAD
-	while (*str++ != '\0')
-=======
 	while (*s++ != '\0')
->>>>>>> 3875d719a489ca97cb44e1781ecfe889f8394c42
 		num_char++;
 	return (num_char);
 }
