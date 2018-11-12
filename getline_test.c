@@ -10,7 +10,7 @@ int main(void)
     while (1)
     {
     dprintf(1,"$ ");
-    read = _getline(&line, &size , stdin);
+    read = _getline(&line, &size , stdout);
     if (read == -1)
         break;
     else if (read > 0)
