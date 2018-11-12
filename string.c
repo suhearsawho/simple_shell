@@ -1,7 +1,6 @@
 #include "shell.h"
 #include <string.h>
 
-extern char **environ;
 /**
   * _strlen - counts length of a string
   * @str: string
@@ -100,7 +99,7 @@ char **tokenize_str(char *str, char *delim)
 	/* tokenize str */
 	tok = strtok(str, delim);
 	n_delim = 0;
-	while(tok)
+	while (tok)
 	{
 		tokens[n_delim] = tok;
 		tok = strtok(NULL, delim);
