@@ -75,6 +75,7 @@ This is a collaborative project to recreate a simple shell in C using what we've
 Files |Description
 ---- | ---
 [_getline](./_getline.c) | TODO
+[prompt_utils](./prompt_utils.c) | 
 [file](./file) | me
 [file](./file) | me
 [file](./file) | me
@@ -82,8 +83,9 @@ Files |Description
 [file](./file) | me
 [file](./file) | me
 [file](./file) | me
-[file](./file) | me
+  
      
+![alt text][5.1]
 
 [_page top_](#0x15-c---simple-shell)
 
@@ -100,3 +102,7 @@ Files |Description
 <!-- links -->
 [1]: https://twitter.com/_Ostoyae
 [2]: https://twitter.com/sususayshello
+
+
+<!-- details -->
+[5.1]: Functions that that directly related to the shell
