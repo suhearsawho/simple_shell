@@ -1,18 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-/* struct declarations */
-typedef struct cmds
-{
-	char *command;
-	int (*run_cmd)(char *);
-} cmd_t;
-
-typedef struct cmd_input {
-	char *str;
-	struct cmd_input *next;
-} input_t;
-
 extern char *environ;
 
 /* header files */
