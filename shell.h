@@ -2,14 +2,16 @@
 #define SHELL_H
 
 /* struct declarations */
-typedef struct cmds {
+typedef struct cmds 
+{
 	char *command;
 	int (*run_cmd)(char *);
 } cmd_t;
 
-typedef struct cmd_input {
-	struct *cmd_input;
+typedef struct cmd_input 
+{
 	char *str;
+	struct cmd_input *next;
 } input_t;
 
 /* header files */
@@ -25,6 +27,9 @@ typedef struct cmd_input {
 
 /* string.c */
 size_t _strlen(char *);
+char *_strdup(char *);
+char **get_path(char *env);
+char **tokenize_str(char *str, char *delim);
 
 /* prompt_util.c */
 void print_ps1(void);
@@ -32,4 +37,5 @@ void print_ps1(void);
 /* function prototypes */
 char *_strtok(char *, const char *);
 ssize_t getline(char **, size_t *, FILE *);
+
 #endif
