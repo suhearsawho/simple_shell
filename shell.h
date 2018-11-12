@@ -3,9 +3,14 @@
 
 /* struct declarations */
 typedef struct cmds {
-	struct cmds *next;
+	char *command;
 	int (*run_cmd)(char *);
 } cmd_t;
+
+typedef struct cmd_input {
+	struct *cmd_input;
+	char *str;
+} input_t;
 
 /* header files */
 #include <sys/types.h>
@@ -16,8 +21,15 @@ typedef struct cmds {
 #include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
+#include <dirent.h>
+
+/* string.c */
+size_t _strlen(char *);
+
+/* prompt_util.c */
+void print_ps1(void);
 
 /* function prototypes */
 char *_strtok(char *, const char *);
-
+ssize_t getline(char **, size_t *, FILE *);
 #endif
