@@ -1,7 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-extern char *environ;
+extern char **environ;
 
 /* header files */
 #include <sys/types.h>
@@ -24,6 +24,7 @@ char **tokenize_str(char *str, char *delim);
 void print_ps1(void);
 char *find_pathname(char **, char *);
 char *_getenv(const char *);
+char *make_pathname(char *, char *);
 
 /* function prototypes */
 char *_strtok(char *, const char *);

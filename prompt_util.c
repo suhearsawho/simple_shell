@@ -36,7 +36,7 @@ char *find_pathname(char **path, char *input)
 		while ((filename = readdir(directory)) != NULL)
 		{
 			/* TODO make strcmp function */
-			str_cmp = strcmp(filename->d_name, input)
+			str_cmp = strcmp(filename->d_name, input);
 			if (str_cmp == 0)
 			{
 				match_found = 1;
@@ -50,6 +50,7 @@ char *find_pathname(char **path, char *input)
 	if (match_found == 1)
 	{
 		result = make_pathname(path[i], input);
+		printf("Size of final result string %lu\n", _strlen(result));
 		closedir(directory);
 		return (result);
 	}
@@ -71,7 +72,7 @@ char *make_pathname(char *path, char *file)
 
 	num_path = _strlen(path);
 	num_file = _strlen(file);
-	result = malloc(sizeof(char) * (num_path + num_input + 2));
+	result = malloc(sizeof(char) * (num_path + num_file + 2));
 	if (result == NULL)
 		return (NULL);
 	for (j = 0; j < num_path; j++)
@@ -90,7 +91,6 @@ char *make_pathname(char *path, char *file)
 char *_getenv(const char *name)
 {
 	unsigned int i, j;
-	char *storage;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
