@@ -9,7 +9,8 @@
   */
 int main(int argc, char *argv[], char *envp[])
 {
-	char **path_values, *input;
+	char **path_values, **input_token, *input;
+	char delimiter[] = " \n\r";
 	size_t n_input;
 	ssize_t getline_stat;
 	(void)argc;
@@ -18,7 +19,10 @@ int main(int argc, char *argv[], char *envp[])
 	path_values = get_path(NULL);
 	print_ps1();
 	while ((getline_stat = getline(&input, &n_input, stdin)) != -1)
-		run_command(input, argv[0], path_values, envp);
+	{
+		input_token = tokenize_str(input, delimiter);
+		run_command(input_token, argv[0], path_values, envp);
+	}
 	free(path_values);
 	free(input);
 	return (0);
@@ -31,14 +35,11 @@ int main(int argc, char *argv[], char *envp[])
   * @path: path directories in a 2d array
   * @envp: environment variable
   */
-void run_command(char *input, char *filename, char **path, char **envp)
+void run_command(char **input_token, char *filename, char **path, char **envp)
 {
-	char **input_token;
-	char delimiter[] = " \n\r";
 	pid_t child_pid;
 	int status;
 
-	input_token = tokenize_str(input, delimiter);
 	if (input_token[0] != NULL)
 	{
 		child_pid = fork();
@@ -46,7 +47,7 @@ void run_command(char *input, char *filename, char **path, char **envp)
 		{
 			if (execve(input_token[0], input_token, envp) == -1)
 			{
-				input_token[0] = find_pathname(path, input);
+				input_token[0] = find_pathname(path, input_token[0]);
 				if (input_token[0] == NULL)
 					printf("%s: No such file or directory\n", filename);
 				else if (execve(input_token[0], input_token, envp) == -1)

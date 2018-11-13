@@ -15,13 +15,13 @@ extern char **environ;
 #include <dirent.h>
 
 /* main.c */
-void run_command(char *, char *, char **, char **);
+void run_command(char **, char *, char **, char **);
 void free_memory(char **);
 
 /* string.c */
 size_t _strlen(char *);
 char *_strdup(char *);
-char **tokenize_str(char *str, char *delim);
+char **tokenize_str(char *, char *);
 int _strcmp(char *, char *);
 
 /* prompt_util.c */
