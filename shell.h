@@ -15,12 +15,12 @@ extern char **environ;
 #include <dirent.h>
 
 /* main.c */
+void run_command(char *, char *, char **, char **);
 void free_memory(char **);
 
 /* string.c */
 size_t _strlen(char *);
 char *_strdup(char *);
-char **get_path(char *env);
 char **tokenize_str(char *str, char *delim);
 int _strcmp(char *, char *);
 
@@ -29,6 +29,7 @@ void print_ps1(void);
 char *find_pathname(char **, char *);
 char *_getenv(const char *);
 char *make_pathname(char *, char *);
+char **get_path(char *env);
 
 /* function prototypes */
 char *_strtok(char *, const char *);
