@@ -1,5 +1,5 @@
 # 0x15. C - Simple Shell
-
+<p align="center"><img src ="https://petco.scene7.com/is/image/PETCO/849430-center-3?$ProductDetail-large$" /></p>
 
 ## Authors
 [Martin Smith](http://www.github.com/Ostoyae) [![alt text][1.1]][1]
