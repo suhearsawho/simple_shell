@@ -13,9 +13,9 @@ int main(int argc, char *argv[], char *envp[])
 	char delimiter[] = " \n\r";
 	size_t n_input;
 	ssize_t getline_stat;
-	(void)argc;
 	shell_t shell_ptrs;
 	
+	(void)argc;
 	input = NULL;
 	path_values = get_path(NULL);
 	print_ps1();
@@ -75,13 +75,12 @@ int run_build_in(shell_t *ptrs)
 {
 	size_t index;
 
-	index = 0;
 	built_t cmd[] = 
 	{
 		{"exit", my_exit},
 		{NULL, NULL},
 	};
-
+	index = 0;
 	while (cmd[index].cmd_name)
 	{
 		if (!_strcmp(ptrs->input_token[0], cmd[index].cmd_name))
