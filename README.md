@@ -1,5 +1,6 @@
 # 0x15. C - Simple Shell
 
+
 ## Authors
 [Martin Smith](http://www.github.com/Ostoyae) [![alt text][1.1]][1]
 
@@ -8,6 +9,7 @@
 ## Table of Context
 
 * [Introduction](#introduction)
+* [Usage](#usage)
 * [Description](#description)
 * [Features](#features)
 * [Modules](#modules)
@@ -17,6 +19,11 @@
 ## Introduction
 
 This is a collaborative project to recreate a simple shell in C using what we've learned up until now. While we can use a fair amount of pre-existing function to build our shell, some optional advance task is to rewrite them.
+
+
+---
+
+## Usage
 
 [_page top_](#0x15-c---simple-shell)
 
@@ -72,11 +79,11 @@ This is a collaborative project to recreate a simple shell in C using what we've
 
 ## Modules
 
-Files |Description
----- | ---
+Files | Description
+--- | ---
 [_getline](./_getline.c) | TODO
-[prompt_utils](./prompt_utils.c) | 
-[file](./file) | me
+[prompt_utils](./prompt_utils.c) | Functions that that directly related to the shell
+[string](./string.c) | Functions that are for dealing with strings
 [file](./file) | me
 [file](./file) | me
 [file](./file) | me
@@ -84,8 +91,6 @@ Files |Description
 [file](./file) | me
 [file](./file) | me
   
-     
-![alt text][5.1]
 
 [_page top_](#0x15-c---simple-shell)
 
@@ -102,7 +107,3 @@ Files |Description
 <!-- links -->
 [1]: https://twitter.com/_Ostoyae
 [2]: https://twitter.com/sususayshello
-
-
-<!-- details -->
-[5.1]: Functions that that directly related to the shell
