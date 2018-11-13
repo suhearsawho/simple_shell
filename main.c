@@ -14,32 +14,38 @@ int main(int argc, char *argv[], char *envp[])
 	size_t n_input;
 	pid_t child_pid;
 	int status;
+	ssize_t getline_stat;
 	(void)argc;
 
 	input = NULL;
 	path_values = get_path(NULL);
-	print_ps1();
-	while (getline(&input, &n_input, stdin) != -1)
+	if (isatty(0))
+		print_ps1();
+	while ((getline_stat = getline(&input, &n_input, stdin)) != -1)
 	{
 		input_token = tokenize_str(input, delimiter);
-		child_pid = fork();
-		if (child_pid == 0)
+		if (input_token[0] != NULL)
 		{
-			if (execve(input_token[0], input_token, envp) == -1)
+			child_pid = fork();
+			if (child_pid == 0)
 			{
-				input_token[0] = find_pathname(path_values, input);
-				if (input_token[0] == NULL)
-					printf("%s: No such file or directory\n", argv[0]);
-				else if (execve(input_token[0], input_token, envp) == -1)
-					printf("%s: No such file or directory\n", argv[0]);
+				if (execve(input_token[0], input_token, envp) == -1)
+				{
+					input_token[0] = find_pathname(path_values, input);
+					if (input_token[0] == NULL)
+						printf("%s: No such file or directory\n", argv[0]);
+					else if (execve(input_token[0], input_token, envp) == -1)
+						printf("%s: No such file or directory\n", argv[0]);
+					free(input_token[0]);
+				}
+				return (0);
 			}
-			return (0);
+			else
+				wait(&status);
 		}
-		else
-			wait(&status);
-		print_ps1();
+		if (isatty(0))
+			print_ps1();
 	}
-	free_memory(path_values);
 	return (0);
 }
 
