@@ -5,6 +5,7 @@
   * @argc: argument count
   * @argv: argument vector
   * @envp: argument environment
+  * Return: 0 on success
   */
 int main(int argc, char *argv[], char *envp[])
 {
@@ -14,45 +15,43 @@ int main(int argc, char *argv[], char *envp[])
 	pid_t child_pid;
 	int status;
 	(void)argc;
-	(void)argv;
-	(void)envp;
-	
-	input = NULL;
-	/* tokenize the PATH variable in environ */
-	path_values = get_path(NULL);	
-	
-	/* print primary prompt */
-	print_ps1();
 
-	/* keep calling getline until getline receives EOF / -1 */
+	input = NULL;
+	path_values = get_path(NULL);
+	print_ps1();
 	while (getline(&input, &n_input, stdin) != -1)
-	{	
-	/* tokenize the string */
-		input_token = tokenize_str(input, delimiter); 
-		/* try running the command with execve */
+	{
+		input_token = tokenize_str(input, delimiter);
 		child_pid = fork();
 		if (child_pid == 0)
 		{
 			if (execve(input_token[0], input_token, envp) == -1)
-			{	
+			{
 				input_token[0] = find_pathname(path_values, input);
 				if (input_token[0] == NULL)
 					printf("%s: No such file or directory\n", argv[0]);
-				if (execve(input_token[0], input_token, envp) == -1)
+				else if (execve(input_token[0], input_token, envp) == -1)
 					printf("%s: No such file or directory\n", argv[0]);
 			}
-			/* TODO free memory in child process! */
 			return (0);
-		}	
-		else
-		{
-			wait(&status);
 		}
-	/* free memory */
-		free(input_token);
-	/* print shell prompt again */
+		else
+			wait(&status);
 		print_ps1();
 	}
-	free(path_values);
+	free_memory(path_values);
 	return (0);
+}
+
+/**
+  * free_memory - frees memory allocated in main
+  * @input: input string
+  */
+void free_memory(char **input)
+{
+	unsigned int i;
+
+	for (i = 0; input[i] != NULL; i++)
+		free(input[i]);
+	free(input);
 }
