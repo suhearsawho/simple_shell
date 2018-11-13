@@ -24,6 +24,13 @@ int main(int argc, char *argv[], char *envp[])
 	return (0);
 }
 
+/**
+  * run_command - runs the command given by the user
+  * @input: input from user
+  * @filename: name of the file being run
+  * @path: path directories in a 2d array
+  * @envp: environment variable
+  */
 void run_command(char *input, char *filename, char **path, char **envp)
 {
 	char **input_token;
