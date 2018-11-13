@@ -60,25 +60,6 @@ int _strcmp(char *str1, char *str2)
 		return (0);
 	return (1);
 }
-/**
- * get_path - get the env path and tokenizes it into a array.
- * @env: string of a path.
- *
- * Return: array / double pointer.
- */
-char **get_path(char *env)
-{
-	char **token_ptr;
-	char *path, *delim;
-
-	delim = ":";
-	if (!env)
-		path = _getenv("PATH");
-	else
-		path = env;
-	token_ptr = tokenize_str(path, delim);
-	return (token_ptr);
-}
 
 /**
  * tokenize_str - function that take a string split them up at a delimiters and
@@ -93,7 +74,7 @@ char **tokenize_str(char *str, char *delim)
 	size_t n_delim = 0;
 	char *str_dup, *tok;
 	char **tokens;
-	
+
 	if (!str || !delim)
 		return (NULL);
 	str_dup = _strdup(str);
