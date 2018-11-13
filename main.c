@@ -20,6 +20,7 @@ int main(int argc, char *argv[], char *envp[])
 	while ((getline_stat = getline(&input, &n_input, stdin)) != -1)
 		run_command(input, argv[0], path_values, envp);
 	free(path_values);
+	free(input);
 	return (0);
 }
 
@@ -50,7 +51,6 @@ void run_command(char *input, char *filename, char **path, char **envp)
 			wait(&status);
 	}
 	free(input_token);
-	free(input);
 	print_ps1();
 }
 
