@@ -9,7 +9,28 @@ void print_ps1(void)
 	size_t len_ps1;
 
 	len_ps1 = _strlen(ps1);
-	write(STDOUT_FILENO, ps1, len_ps1);
+	if (isatty(0))
+		write(STDOUT_FILENO, ps1, len_ps1);
+}
+
+/**
+ * get_path - get the env path and tokenizes it into a array.
+ * @env: string of a path.
+ *
+ * Return: array / double pointer.
+ */
+char **get_path(char *env)
+{
+	char **token_ptr;
+	char *path, *delim;
+
+	delim = ":";
+	if (!env)
+		path = _getenv("PATH");
+	else
+		path = env;
+	token_ptr = tokenize_str(path, delim);
+	return (token_ptr);
 }
 
 /**
