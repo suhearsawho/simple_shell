@@ -50,7 +50,6 @@ char *find_pathname(char **path, char *input)
 	if (match_found == 1)
 	{
 		result = make_pathname(path[i], input);
-		printf("Size of final result string %lu\n", _strlen(result));
 		closedir(directory);
 		return (result);
 	}
