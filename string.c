@@ -73,7 +73,7 @@ char **get_path(char *env)
 
 	delim = ":";
 	if (!env)
-		path = getenv("PATH");
+		path = _getenv("PATH");
 	else
 		path = env;
 	token_ptr = tokenize_str(path, delim);
@@ -93,7 +93,7 @@ char **tokenize_str(char *str, char *delim)
 	size_t n_delim = 0;
 	char *str_dup, *tok;
 	char **tokens;
-
+	
 	if (!str || !delim)
 		return (NULL);
 	str_dup = _strdup(str);
@@ -107,7 +107,6 @@ char **tokenize_str(char *str, char *delim)
 	}
 	/*free the str_dup*/
 	free(str_dup);
-
 	/* malloc for tokens based on n_delim + 1 for the Null */
 	tokens = malloc(sizeof(char *) * (n_delim + 1));
 	if (!tokens)

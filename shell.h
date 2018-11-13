@@ -14,6 +14,9 @@ extern char **environ;
 #include <string.h>
 #include <dirent.h>
 
+/* main.c */
+void free_memory(char **);
+
 /* string.c */
 size_t _strlen(char *);
 char *_strdup(char *);
