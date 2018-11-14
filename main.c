@@ -26,7 +26,7 @@ int main(int argc, char *argv[], char *envp[])
 		shell_ptrs.input = input;
 		shell_ptrs.input_token = input_token;
 		if (run_build_in(&shell_ptrs))
-			run_command(input_token, argv[0], path_values, envp);
+			run_command(&shell_ptrs, argv[0], envp);
 		free(input_token);
 	}
 	free(path_values);
@@ -41,9 +41,11 @@ int main(int argc, char *argv[], char *envp[])
   * @path: path directories in a 2d array
   * @envp: environment variable
   */
-void run_command(char **input_token, char *filename, char **path, char **envp)
+void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 {
 	pid_t child_pid;
+	char **input_token = shell_ptrs->input_token;
+	char **path = shell_ptrs->path_values;
 	int status;
 
 	if (input_token[0] != NULL)
@@ -60,6 +62,10 @@ void run_command(char **input_token, char *filename, char **path, char **envp)
 					printf("%s: No such file or directory\n", filename);
 				free(input_token[0]);
 			}
+			free(shell_ptrs->input);
+			free(path);
+			free(input_token);
+			_exit(130);
 		}
 		else
 			wait(&status);
@@ -75,11 +81,17 @@ int run_build_in(shell_t *ptrs)
 {
 	size_t index;
 
+	if (!ptrs)
+		return(1);
+	if (!(ptrs->input_token[0]))
+		return (1);
+
 	built_t cmd[] = 
 	{
 		{"exit", my_exit},
 		{NULL, NULL},
 	};
+
 	index = 0;
 	while (cmd[index].cmd_name)
 	{
