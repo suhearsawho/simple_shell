@@ -13,15 +13,21 @@ int main(int argc, char *argv[], char *envp[])
 	char delimiter[] = " \n\r";
 	size_t n_input;
 	ssize_t getline_stat;
-	(void)argc;
+	shell_t shell_ptrs;
 
+	(void)argc;
 	input = NULL;
 	path_values = get_path(NULL);
 	print_ps1();
 	while ((getline_stat = getline(&input, &n_input, stdin)) != -1)
 	{
 		input_token = tokenize_str(input, delimiter);
-		run_command(input_token, argv[0], path_values, envp);
+		shell_ptrs.path_values = path_values;
+		shell_ptrs.input = input;
+		shell_ptrs.input_token = input_token;
+		if (run_build_in(&shell_ptrs))
+			run_command(&shell_ptrs, argv[0], envp);
+		free(input_token);
 	}
 	free(path_values);
 	free(input);
@@ -30,14 +36,15 @@ int main(int argc, char *argv[], char *envp[])
 
 /**
   * run_command - runs the command given by the user
-  * @input: input from user
+  * @shell_ptrs: structure containing all malloced spaces
   * @filename: name of the file being run
-  * @path: path directories in a 2d array
   * @envp: environment variable
   */
-void run_command(char **input_token, char *filename, char **path, char **envp)
+void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 {
 	pid_t child_pid;
+	char **input_token = shell_ptrs->input_token;
+	char **path = shell_ptrs->path_values;
 	int status;
 
 	if (input_token[0] != NULL)
@@ -54,12 +61,47 @@ void run_command(char **input_token, char *filename, char **path, char **envp)
 					printf("%s: No such file or directory\n", filename);
 				free(input_token[0]);
 			}
+			free(shell_ptrs->input);
+			free(path);
+			free(input_token);
+			_exit(130);
 		}
 		else
 			wait(&status);
 	}
-	free(input_token);
 	print_ps1();
+}
+
+/**
+ * run_build_in - checks if the the user calls a built-in cmd.
+ * @ptrs: contains all the malloced spaces.
+ * Return: 1 for match not found, 0 for match found.
+ */
+int run_build_in(shell_t *ptrs)
+{
+	size_t index;
+
+	built_t cmd[] = {
+		{"exit", my_exit},
+		{NULL, NULL},
+	};
+
+	if (!ptrs)
+		return (1);
+	if (!(ptrs->input_token[0]))
+		return (1);
+
+	index = 0;
+	while (cmd[index].cmd_name)
+	{
+		if (!_strcmp(ptrs->input_token[0], cmd[index].cmd_name))
+		{
+			(cmd[index].cmd)(ptrs);
+			return (0);
+		}
+		index++;
+	}
+	return (1);
 }
 
 /**
