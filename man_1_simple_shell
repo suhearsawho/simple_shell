@@ -1,8 +1,29 @@
-.TH HOOMAN 1 "20 November 2018" "HOOMAN man page"
+.TH Masu 1 "20 November 2018" "Masu man page"
 
 .SH NAME
-HOOMAN - A Shell program produced by Susan Su and Martin Smith
+Masu - A Shell program produced by Susan Su and Martin Smith
 
 .SH SYNOPSIS
-.B
+.B ./Masu 
 
+.SH DESCRIPTION
+The Masu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
+In the interactive mode, commands are taken from the terminal. In the non-interactive mode, commands are piped from a file.
+
+.SH OPTIONS
+
+
+.SH ARGUMENTS
+
+
+.SH INVOCATION
+
+
+.SH COMMAND EXECUTION ENVIRONMENT
+When a user enters a command from the terminal or a file, the command is checked against three possible cases. 
+
+First, the command is compared to existing aliases.
+
+Second, the command is compared to built-in commands. This category of commands reside as executable code in the main source code that is used to initiate the Masu Shell. 
+
+Third, the command is compared to simple commands. This category of commands reside as executable files in the /bin library. The /bin library is also listed in the PATH environment variable. When a simple command is invoked, the command is invoked in a child process that will terminate upon successful execution.  
