@@ -15,10 +15,12 @@ extern char **environ;
 #include <dirent.h>
 
 /**
- * shell_env - stores address for pointer to free.
- * @path_val: pointer to path values
- * @input_buf: pointer to buffer that getline creates.
- * @cur_tok: pointers for input token.
+ * struct shell_env - stores address for pointer to free.
+ * @path_values: pointer to path values
+ * @input: pointer to buffer that getline creates.
+ * @input_token: pointers for input token.
+ *
+ * Description: provides a storage for all elements that are malloced.
  */
 typedef struct shell_env
 {
@@ -29,9 +31,11 @@ typedef struct shell_env
 } shell_t;
 
 /**
- * build_in_cmd - struct for out fuction pointer to deal with building coomands
+ * struct built_in_cmd - struct for different built in commands.
  * @cmd_name: name of the cmd
- * @cmd: function pointer to run the cmd.
+ * @cmd: function pointer to run the cmd
+ *
+ * Description: struct for different built in commands in our shell
  */
 typedef struct built_in_cmd
 {
@@ -59,7 +63,7 @@ char **get_path(char *env);
 
 /* buildin.c */
 void my_exit(shell_t *);
-
+void print_env(shell_t *);
 
 /* function prototypes */
 char *_strtok(char *, const char *);

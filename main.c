@@ -28,6 +28,7 @@ int main(int argc, char *argv[], char *envp[])
 		if (run_build_in(&shell_ptrs))
 			run_command(&shell_ptrs, argv[0], envp);
 		free(input_token);
+		print_ps1();
 	}
 	free(path_values);
 	free(input);
@@ -69,7 +70,6 @@ void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 		else
 			wait(&status);
 	}
-	print_ps1();
 }
 
 /**
@@ -83,6 +83,7 @@ int run_build_in(shell_t *ptrs)
 
 	built_t cmd[] = {
 		{"exit", my_exit},
+		{"env", print_env},
 		{NULL, NULL},
 	};
 
