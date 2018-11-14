@@ -14,7 +14,7 @@ int main(int argc, char *argv[], char *envp[])
 	size_t n_input;
 	ssize_t getline_stat;
 	shell_t shell_ptrs;
-	
+
 	(void)argc;
 	input = NULL;
 	path_values = get_path(NULL);
@@ -36,9 +36,8 @@ int main(int argc, char *argv[], char *envp[])
 
 /**
   * run_command - runs the command given by the user
-  * @input: tokenized input from user
+  * @shell_ptrs: structure containing all malloced spaces
   * @filename: name of the file being run
-  * @path: path directories in a 2d array
   * @envp: environment variable
   */
 void run_command(shell_t *shell_ptrs, char *filename, char **envp)
@@ -75,22 +74,22 @@ void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 
 /**
  * run_build_in - checks if the the user calls a built-in cmd.
- * @input_token: tokenized input from the user.
+ * @ptrs: contains all the malloced spaces.
+ * Return: 1 for match not found, 0 for match found.
  */
 int run_build_in(shell_t *ptrs)
 {
 	size_t index;
 
-	if (!ptrs)
-		return(1);
-	if (!(ptrs->input_token[0]))
-		return (1);
-
-	built_t cmd[] = 
-	{
+	built_t cmd[] = {
 		{"exit", my_exit},
 		{NULL, NULL},
 	};
+
+	if (!ptrs)
+		return (1);
+	if (!(ptrs->input_token[0]))
+		return (1);
 
 	index = 0;
 	while (cmd[index].cmd_name)
