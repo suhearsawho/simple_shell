@@ -6,10 +6,22 @@
  */
 void my_exit(shell_t *ptrs)
 {
+	int exit_status;
+	unsigned int i;
+	char *exit_str;
+
+	exit_str = ptrs->input_token[1];
+	exit_status = 130;
+	if (exit_str != NULL)
+	{
+		exit_status = 0;
+		for (i = 0; exit_str[i] != '\0'; i++)
+			exit_status = exit_status * 10 + (exit_str[i] - '0');
+	}
 	free(ptrs->input_token);
 	free(ptrs->input);
 	free(ptrs->path_values);
-	exit(130);
+	exit(exit_status);
 }
 
 /**
