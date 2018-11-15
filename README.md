@@ -96,12 +96,12 @@ user@ubuntu:~ $
 ## Features
 
 ### Advance task
-- [ ] Handle Ctrl+C #7
-- [ ] impl cd #6
-- [ ] setenv #5
-- [ ] unsetenv #5
-- [ ] getline #3
-- [ ] strtok #4
+- [ ] [Handle Ctrl+C](https://github.com/suhearsawho/simple_shell/issues/7)
+- [ ] [impl cd](https://github.com/suhearsawho/simple_shell/issues/6)
+- [ ] [setenv](https://github.com/suhearsawho/simple_shell/issues/5)
+- [ ] [unsetenv](https://github.com/suhearsawho/simple_shell/issues/5)
+- [ ] [getline](https://github.com/suhearsawho/simple_shell/issues/3)
+- [ ] [strtok](https://github.com/suhearsawho/simple_shell/issues/4)
 
 
 [_page top_](#0x15-c---simple-shell)
