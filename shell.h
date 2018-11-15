@@ -46,7 +46,8 @@ typedef struct built_in_cmd
 /* main.c */
 int run_build_in(shell_t *);
 void run_command(shell_t *, char *, char **);
-void free_memory(char **);
+int run_path(shell_t *, char *);
+int check_slash(char *);
 
 /* string.c */
 size_t _strlen(char *);

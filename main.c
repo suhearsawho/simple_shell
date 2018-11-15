@@ -25,13 +25,34 @@ int main(int argc, char *argv[], char *envp[])
 		shell_ptrs.path_values = path_values;
 		shell_ptrs.input = input;
 		shell_ptrs.input_token = input_token;
-		if (run_build_in(&shell_ptrs))
-			run_command(&shell_ptrs, argv[0], envp);
+		if (check_slash(input) == 1)
+			run_path(&shell_ptrs, argv[0]);
+		else
+		{
+			if (run_build_in(&shell_ptrs) == 1)
+				run_command(&shell_ptrs, argv[0], envp);
+		}
 		free(input_token);
 		print_ps1();
 	}
 	free(path_values);
 	free(input);
+	return (0);
+}
+
+/**
+  * check_slash - checks if there are any slashes in the command
+  * @str: input string
+  * Return: 1 if slash is found 0 if slash is not found
+  */
+int check_slash(char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str == '/')
+			return (1);
+		str++;
+	}
 	return (0);
 }
 
@@ -46,6 +67,7 @@ void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 	pid_t child_pid;
 	char **input_token = shell_ptrs->input_token;
 	char **path = shell_ptrs->path_values;
+	char *input_org;
 	int status;
 
 	if (input_token[0] != NULL)
@@ -53,18 +75,17 @@ void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 		child_pid = fork();
 		if (child_pid == 0)
 		{
-			if (execve(input_token[0], input_token, envp) == -1)
-			{
-				input_token[0] = find_pathname(path, input_token[0]);
-				if (input_token[0] == NULL)
-					printf("%s: No such file or directory\n", filename);
-				else if (execve(input_token[0], input_token, envp) == -1)
-					printf("%s: No such file or directory\n", filename);
-				free(input_token[0]);
-			}
+			input_org = _strdup(input_token[0]);
+			input_token[0] = find_pathname(path, input_token[0]);
+			if (input_token[0] == NULL)
+				printf("%s: 1: %s: not found\n", filename, input_org);
+			else if (execve(input_token[0], input_token, envp) == -1)
+				printf("%s: 1: %s: not found\n", filename, input_org);
+			free(input_token[0]);
 			free(shell_ptrs->input);
 			free(path);
 			free(input_token);
+			free(input_org);
 			_exit(130);
 		}
 		else
@@ -106,14 +127,32 @@ int run_build_in(shell_t *ptrs)
 }
 
 /**
-  * free_memory - frees memory allocated in main
-  * @input: input string
+  * run_path - runs the command specified by the pathname
+  * @shell_ptrs: structure containing all malloced memory
+  * @filename: filename of the file
+  * Return: still to be determined
   */
-void free_memory(char **input)
+int run_path(shell_t *shell_ptrs, char *filename)
 {
-	unsigned int i;
+	pid_t child_pid;
+	int status, exit_status;
+	char **input_token = shell_ptrs->input_token;
 
-	for (i = 0; input[i] != NULL; i++)
-		free(input[i]);
-	free(input);
+	exit_status = 0;
+	child_pid = fork();
+	if (child_pid == 0)
+	{
+		if (execve(input_token[0], input_token, environ) == -1)
+		{
+			exit_status = 127;
+			printf("%s: No such file or directory\n", filename);
+		}
+		free(input_token);
+		free(shell_ptrs->path_values);
+		free(shell_ptrs->input);
+		_exit(127);
+	}
+	else
+		wait(&status);
+	return (exit_status);
 }
