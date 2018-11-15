@@ -8,44 +8,41 @@
   */
 char *_strtok(char *str, const char *delim)
 {
-	static char *begin, *end;
-	const char *delim_cpy;
-	int word_found;
-	char *track;
+	static char *begin, *end_str, *end;
+	unsigned int i, j;
+	int word_found = 0;
 
-	if (begin == NULL)
+	if (str == NULL)
 	{
-		if (str == NULL)
+		if (begin == NULL || end == NULL)
 			return (NULL);
-		begin = str;
+		str = end + 1;
 	}
 	else
+		end_str = str + _strlen(str);
+	for (i = 0; str + i < end_str; i++)
 	{
-		if (str != NULL)
-			begin = str;
-		begin = end + 1;
-	}
-	if (delim == NULL)
-		return (NULL);
-	delim_cpy = delim;
-	for (track = begin, word_found = 0; *track != '\0'; track++)
-	{
-		for (delim = delim_cpy; *delim != '\0' && *delim != *track; delim++)
-			;
-		if (*delim == '\0' && word_found == 0)
+		for (j = 0; delim != NULL && delim[j] != '\0'; j++)
 		{
-			begin = track;
-			word_found = 1;
+			if (str[i] == delim[j])
+			{
+				if (word_found == 1)
+				{
+					str[i] = '\0';
+					end = str + i;
+					return (begin);
+				}
+				break;
+			}
 		}
-		else if (*delim != '\0' && word_found == 1)
-			break;
+		if (delim[j] == '\0' && word_found == 0)
+		{
+			word_found = 1;
+			begin = str + i;
+		}
 	}
-	if (word_found == 0)
-	{
-		begin = NULL;
-		return (NULL);
-	}
-	*track = '\0';
-	end = track;
-	return (begin);
+	end = NULL;
+	if (word_found == 1)
+		return (begin);
+	return (NULL);
 }
