@@ -52,9 +52,11 @@ user@ubuntu:~ $
 ---
 ## Description
 
-[^1]: list
+
+[^1]: List of allowed functions and system calls
+
 <details>
-<summary>List of allowed functions and system calls</summary>
+<summary></summary>
 
 * access (man 2 access)
 * chdir (man 2 chdir)
