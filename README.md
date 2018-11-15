@@ -1,5 +1,5 @@
 # 0x15. C - Simple Shell 
-## Masu Shell
+## MaSu Shell
 <p align="center"><img src ="https://petco.scene7.com/is/image/PETCO/849430-center-3?$ProductDetail-large$" /></p>
 
 ## Authors
@@ -52,6 +52,9 @@ user@ubuntu:~ $
 ---
 ## Description
 
+MaSu gets its name for the first two letter of the collaberators MArtin and SUsan is so happens to also be the Finnish for guinea pig :lol:
+
+MaSu shell is a simple shell.
 
 <details>
 <summary>List of allowed functions and system calls</summary>
