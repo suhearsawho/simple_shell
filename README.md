@@ -19,7 +19,7 @@
 
 ## Introduction
 
-"Simple shell" is a project to recreate shell in C using what we've learned up until now. While we can use a fair amount of pre-existing functions [^1] to build our shell most basic function-- such as strlen, strdup, etcetera -- have to be written by us, there are optional tasks to rewrite them.
+"Simple shell" is a project to recreate shell in C using what we've learned up until now. While we can use a fair amount of pre-existing functions to build our shell most basic function-- such as strlen, strdup, etcetera -- have to be written by us, there are optional tasks to rewrite them.
 
 Including our abilities to write a program in "C" this project is also meant to test our collaborative prowess and work ethic. As such we must work within the same GitHub repository, where communication is critical to avoid merge conflicts. Also, whiteboard and peer programming are also strongly encouraged and from our experience has worked wonders for our progress.
 
@@ -53,10 +53,8 @@ user@ubuntu:~ $
 ## Description
 
 
-[^1]: List of allowed functions and system calls
-
 <details>
-<summary></summary>
+<summary>List of allowed functions and system calls</summary>
 
 * access (man 2 access)
 * chdir (man 2 chdir)
@@ -96,6 +94,15 @@ user@ubuntu:~ $
 
 ---
 ## Features
+
+### Advance task
+- [ ] Handle Ctrl+C #7
+- [ ] impl cd #6
+- [ ] setenv #5
+- [ ] unsetenv #5
+- [ ] getline #3
+- [ ] strtok #4
+
 
 [_page top_](#0x15-c---simple-shell)
 
