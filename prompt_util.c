@@ -5,7 +5,7 @@
   */
 void print_ps1(void)
 {
-	char ps1[] = "$ ";
+	char ps1[] = "MARSU$ ";
 	size_t len_ps1;
 
 	len_ps1 = _strlen(ps1);
@@ -32,7 +32,7 @@ char **get_path(char **modify_path)
 	if (num_char == 0)
 	{
 		(*modify_path)[0] = '.';
-		(*modify_path)[0] = '\0';
+		(*modify_path)[1] = '\0';
 	}
 	else
 	{
