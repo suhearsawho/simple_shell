@@ -27,7 +27,7 @@ typedef struct shell_env
 	char **path_values;
 	char *input;
 	char **input_token;
-
+	char *modify_path;
 } shell_t;
 
 /**
@@ -60,7 +60,10 @@ void print_ps1(void);
 char *find_pathname(char **, char *);
 char *_getenv(const char *);
 char *make_pathname(char *, char *);
-char **get_path(char *env);
+char **get_path(char **);
+
+/* prompt_util2.c */
+void free_shell_t(shell_t *);
 
 /* buildin.c */
 void my_exit(shell_t *);

@@ -9,7 +9,7 @@
   */
 int main(int argc, char *argv[], char *envp[])
 {
-	char **path_values, **input_token, *input;
+	char **path_values, *modify_path, **input_token, *input;
 	char delimiter[] = " \n\r\t";
 	size_t n_input;
 	ssize_t getline_stat;
@@ -17,13 +17,14 @@ int main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	input = NULL;
-	path_values = get_path(NULL);
+	path_values = get_path(&modify_path);
 	print_ps1();
+	shell_ptrs.modify_path = modify_path;
+	shell_ptrs.path_values = path_values;
 	while ((getline_stat = getline(&input, &n_input, stdin)) != -1)
 	{
-		input_token = tokenize_str(input, delimiter);
-		shell_ptrs.path_values = path_values;
 		shell_ptrs.input = input;
+		input_token = tokenize_str(input, delimiter);
 		shell_ptrs.input_token = input_token;
 		if (check_slash(input) == 1)
 			run_path(&shell_ptrs, argv[0]);
@@ -35,6 +36,7 @@ int main(int argc, char *argv[], char *envp[])
 		free(input_token);
 		print_ps1();
 	}
+	free(modify_path);
 	free(path_values);
 	free(input);
 	return (0);
@@ -82,9 +84,7 @@ void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 			else if (execve(input_token[0], input_token, envp) == -1)
 				printf("%s: 1: %s: not found\n", filename, input_org);
 			free(input_token[0]);
-			free(shell_ptrs->input);
-			free(path);
-			free(input_token);
+			free_shell_t(shell_ptrs);
 			free(input_org);
 			_exit(130);
 		}
@@ -147,9 +147,7 @@ int run_path(shell_t *shell_ptrs, char *filename)
 			exit_status = 127;
 			printf("%s: No such file or directory\n", filename);
 		}
-		free(input_token);
-		free(shell_ptrs->path_values);
-		free(shell_ptrs->input);
+		free_shell_t(shell_ptrs);
 		_exit(127);
 	}
 	else
