@@ -22,19 +22,17 @@ void p_commanderr(char *command, char *filename)
 	char *error_message;
 	char *error = ": command not found\n";
 	size_t num_char, i;
-
 	(void)filename;
+
 	num_char = _strlen(error) + _strlen(command);
 	error_message = malloc(sizeof(char) * (++num_char));
 
 	i = 0;
 	while (*command != '\0')
-	{
 		error_message[i++] = *command++;
-	}
 	while (*error != '\0')
 		error_message[i++] = *error++;
 	error_message[i] = '\0';
-	write(STDOUT_FILENO, error_message, num_char);
+	write(STDERR_FILENO, error_message, num_char);
 	free(error_message);
 }
