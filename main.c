@@ -26,7 +26,10 @@ int main(int argc, char *argv[], char *envp[])
 		shell_ptrs.input = input;
 		input_token = tokenize_str(input, delimiter);
 		shell_ptrs.input_token = input_token;
-		if (check_slash(input_token[0]) == 1)
+		if (input_token[0] == NULL)
+			/* do nothing */
+			;
+		else if (check_slash(input_token[0]) == 1)
 			run_path(&shell_ptrs, argv[0]);
 		else
 		{

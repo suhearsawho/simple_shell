@@ -29,7 +29,7 @@ void p_commanderr(char *command, char *filename)
 
 	i = 0;
 	while (*command != '\0')
-		error_message[i++] = *command++;
+		error_message[i++] = *error++;
 	while (*error != '\0')
 		error_message[i++] = *error++;
 	error_message[i] = '\0';
