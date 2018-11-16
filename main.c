@@ -26,7 +26,7 @@ int main(int argc, char *argv[], char *envp[])
 		shell_ptrs.input = input;
 		input_token = tokenize_str(input, delimiter);
 		shell_ptrs.input_token = input_token;
-		if (check_slash(input) == 1)
+		if (check_slash(input_token[0]) == 1)
 			run_path(&shell_ptrs, argv[0]);
 		else
 		{
@@ -63,8 +63,9 @@ int check_slash(char *str)
   * @shell_ptrs: structure containing all malloced spaces
   * @filename: name of the file being run
   * @envp: environment variable
+  * Return: errno value
   */
-void run_command(shell_t *shell_ptrs, char *filename, char **envp)
+int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 {
 	pid_t child_pid;
 	char **input_token = shell_ptrs->input_token;
@@ -79,18 +80,26 @@ void run_command(shell_t *shell_ptrs, char *filename, char **envp)
 		{
 			input_org = _strdup(input_token[0]);
 			input_token[0] = find_pathname(path, input_token[0]);
-			if (input_token[0] == NULL)
-				printf("%s: 1: %s: not found\n", filename, input_org);
-			else if (execve(input_token[0], input_token, envp) == -1)
-				printf("%s: 1: %s: not found\n", filename, input_org);
-			free(input_token[0]);
+			if (input_token[0] != NULL)
+			{
+				if (execve(input_token[0], input_token, envp) == -1)
+					perror(filename);
+				free(input_token[0]);
+			}
+			else
+			{
+				errno = 127;
+				p_commanderr(input_org, filename);
+			}
 			free_shell_t(shell_ptrs);
 			free(input_org);
-			_exit(130);
+			/* _exit(130); */
+			_exit(errno);
 		}
 		else
 			wait(&status);
 	}
+	return (errno);
 }
 
 /**
@@ -135,22 +144,18 @@ int run_build_in(shell_t *ptrs)
 int run_path(shell_t *shell_ptrs, char *filename)
 {
 	pid_t child_pid;
-	int status, exit_status;
+	int status;
 	char **input_token = shell_ptrs->input_token;
 
-	exit_status = 0;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
 		if (execve(input_token[0], input_token, environ) == -1)
-		{
-			exit_status = 127;
-			printf("%s: No such file or directory\n", filename);
-		}
+			perror(filename);
 		free_shell_t(shell_ptrs);
-		_exit(127);
+		_exit(errno);
 	}
 	else
 		wait(&status);
-	return (exit_status);
+	return (errno);
 }

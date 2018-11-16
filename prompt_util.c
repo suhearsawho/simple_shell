@@ -56,7 +56,8 @@ char **get_path(char **modify_path)
 			else
 				(*modify_path)[j++] = path[i];
 		}
-		(*modify_path)[j] = '\0';
+		for (; j < num_char + 2; j++)
+			(*modify_path)[j] = '\0';
 	}
 	token_ptr = tokenize_str(*modify_path, delim);
 	return (token_ptr);

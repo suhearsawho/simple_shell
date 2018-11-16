@@ -13,6 +13,7 @@ extern char **environ;
 #include <fcntl.h>
 #include <string.h>
 #include <dirent.h>
+#include <errno.h>
 
 /**
  * struct shell_env - stores address for pointer to free.
@@ -45,7 +46,7 @@ typedef struct built_in_cmd
 
 /* main.c */
 int run_build_in(shell_t *);
-void run_command(shell_t *, char *, char **);
+int run_command(shell_t *, char *, char **);
 int run_path(shell_t *, char *);
 int check_slash(char *);
 
@@ -64,6 +65,7 @@ char **get_path(char **);
 
 /* prompt_util2.c */
 void free_shell_t(shell_t *);
+void p_commanderr(char *, char *);
 
 /* buildin.c */
 void my_exit(shell_t *);

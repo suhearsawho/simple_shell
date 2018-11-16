@@ -18,10 +18,7 @@ void my_exit(shell_t *ptrs)
 		for (i = 0; exit_str[i] != '\0'; i++)
 			exit_status = exit_status * 10 + (exit_str[i] - '0');
 	}
-	free(ptrs->input_token);
-	free(ptrs->input);
-	free(ptrs->path_values);
-	free(ptrs->modify_path);
+	free_shell_t(ptrs);
 	exit(exit_status);
 }
 
