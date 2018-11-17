@@ -106,3 +106,40 @@ char **tokenize_str(char *str, char *delim)
 
 	return (tokens);
 }
+
+/**
+ * str_concat_dilem - this function concatenates two strings with a delimiter.
+ * @s1: string 1/2 to concat.
+ * @s2: string 2/2 to concat.
+ * @delim: the delimiter to use.
+ * Return: Pointer to concatenated string.
+ */
+char *str_concat_dilem(char *s1, char *s2, char *delim)
+{
+	int a, b, c, d;
+	char *str;
+
+	a = _strlen(s1);
+	b = _strlen(s2);
+	d = _strlen(delim);
+
+	str = malloc(sizeof(char) * (a + b + d + 1));
+	if (!str)
+		return (NULL);
+	c = 0;
+	while (c < (a + b + d))
+	{
+		if (c < a)
+			str[c] = s1[c];
+		else if (c < d)
+			str[c] = delim[c - a];
+		else
+			str[c] = s2[c - a - d];
+
+		c++;
+	}
+	str[c] = 0;
+
+	return (str);
+}
+

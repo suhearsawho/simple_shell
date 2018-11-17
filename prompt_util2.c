@@ -36,3 +36,40 @@ void p_commanderr(char *command, char *filename)
 	write(STDERR_FILENO, error_message, num_char);
 	free(error_message);
 }
+
+/**
+ * setenv - set a enviorment vars to a value
+ * @name: name of the variable to set.
+ * @value: values the set the variable to.
+ * @overwrite: 1 to overwrite the variable if it exist, 0 to not overwrite if
+ * the variable exists
+ *
+ * Return: 0 on success, or -1 on error.
+ */
+int setenv(const char *name, const char *value, int overwrite)
+{
+	char **old_env, **new_env;
+	char *new_value, *env, *delim = "=";
+	size_t env_size = 0;
+
+	while (environ[env_size])
+		env_size++;
+	env_size++;
+
+	env = _getenv(name);
+	if (!env && !overwrite)
+		return (-1);
+	else if (env && !overwrite)
+		return (0);
+
+	new_value = str_concat_delim(name, value, delim);
+
+	if (!env)
+		_realloc(environ, sizeof(char *) * env_size,
+				sizeof(char *) * (env_size + 1);
+		environ[env_size + 1] = new_value;
+	else if (env)
+		env = new_value;
+
+	return (0);
+}
