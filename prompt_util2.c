@@ -13,7 +13,7 @@ void free_shell_t(shell_t *shell_ptrs)
 }
 
 /**
-  * p_commanderr - prints out the error associated with unrecognized command inputs
+  * p_commanderr - prints error for failed command
   * @command: command that was submitted by user
   * @filename: name of the file being run
   */
@@ -29,7 +29,7 @@ void p_commanderr(char *command, char *filename)
 
 	i = 0;
 	while (*command != '\0')
-		error_message[i++] = *error++;
+		error_message[i++] = *command++;
 	while (*error != '\0')
 		error_message[i++] = *error++;
 	error_message[i] = '\0';
