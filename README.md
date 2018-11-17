@@ -1,4 +1,6 @@
-# 0x15. C - Simple Shell
+# 0x15. C - Simple Shell 
+## Masu Shell
+<p align="center"><img src ="https://petco.scene7.com/is/image/PETCO/849430-center-3?$ProductDetail-large$" /></p>
 
 ## Authors
 [Martin Smith](http://www.github.com/Ostoyae) [![alt text][1.1]][1]
@@ -8,6 +10,7 @@
 ## Table of Context
 
 * [Introduction](#introduction)
+* [Usage](#usage)
 * [Description](#description)
 * [Features](#features)
 * [Modules](#modules)
@@ -16,8 +19,34 @@
 
 ## Introduction
 
-This is a collaborative project to recreate a simple shell in C using what we've learned up until now. While we can use a fair amount of pre-existing function to build our shell, some optional advance task is to rewrite them.
+"Simple shell" is a project to recreate shell in C using what we've learned up until now. While we can use a fair amount of pre-existing functions to build our shell most basic function-- such as strlen, strdup, etcetera -- have to be written by us, there are optional tasks to rewrite them.
 
+Including our abilities to write a program in "C" this project is also meant to test our collaborative prowess and work ethic. As such we must work within the same GitHub repository, where communication is critical to avoid merge conflicts. Also, whiteboard and peer programming are also strongly encouraged and from our experience has worked wonders for our progress.
+
+---
+
+## Usage
+
+### Basic usage
+
+using masu shell in interactive mode.
+```
+user@ubuntu:~ $ ./masu 
+masu:~ $
+masu:~ $ ls -a
+.   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
+..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
+masu@:~ $ cd work
+masu@:~/work $ 
+```
+
+using masu shell in non-interactive.
+```
+user@ubuntu:~ $ echo "/bin/ls -a" | ./masu
+.   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
+..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
+user@ubuntu:~ $ 
+```
 [_page top_](#0x15-c---simple-shell)
 
 ---
@@ -66,30 +95,40 @@ This is a collaborative project to recreate a simple shell in C using what we've
 ---
 ## Features
 
+### Advance task
+- [ ] [Handle Ctrl+C](https://github.com/suhearsawho/simple_shell/issues/7)
+- [ ] [impl cd](https://github.com/suhearsawho/simple_shell/issues/6)
+- [ ] [setenv](https://github.com/suhearsawho/simple_shell/issues/5)
+- [ ] [unsetenv](https://github.com/suhearsawho/simple_shell/issues/5)
+- [ ] [getline](https://github.com/suhearsawho/simple_shell/issues/3)
+- [ ] [strtok](https://github.com/suhearsawho/simple_shell/issues/4)
+
+
 [_page top_](#0x15-c---simple-shell)
 
 ---
 
 ## Modules
 
-Files |Description
----- | ---
-[_getline](./_getline.c) | TODO
+Files | Description
+--- | ---
+[main.c](./main.c) | Main entry point for the masu shell.
+[shell.h](./file) | header file for the shell containing all the prototypes for the shell.
+[prompt_util.c](./prompt_util.c) | Functions that that directly related to the shell basic functionality.
+[string.c](./string.c) | Functions that are for related to processing strings for the shell.
 [file](./file) | me
 [file](./file) | me
 [file](./file) | me
-[file](./file) | me
-[file](./file) | me
-[file](./file) | me
-[file](./file) | me
-[file](./file) | me
-     
+[_strtok.c](./_strtok.c) | TODO
+[_getline.c](./_getline.c) | TODO
+  
 
 [_page top_](#0x15-c---simple-shell)
 
 ---
 
 ## Acknowledgments
+
 
 [_page top_](#0x15-c---simple-shell)
 
