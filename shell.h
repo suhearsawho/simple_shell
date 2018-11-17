@@ -55,6 +55,7 @@ size_t _strlen(char *);
 char *_strdup(char *);
 char **tokenize_str(char *, char *);
 int _strcmp(char *, char *);
+char *str_concat_delim(char *, char *, char *);
 
 /* prompt_util.c */
 void print_ps1(void);
@@ -66,6 +67,7 @@ char **get_path(char **);
 /* prompt_util2.c */
 void free_shell_t(shell_t *);
 void p_commanderr(char *, char *);
+int setenv(const char *, const char *, int);
 
 /* buildin.c */
 void my_exit(shell_t *);
@@ -74,5 +76,8 @@ void print_env(shell_t *);
 /* function prototypes */
 char *_strtok(char *, const char *);
 ssize_t getline(char **, size_t *, FILE *);
+
+/* mem_manage.c */
+void *_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif
