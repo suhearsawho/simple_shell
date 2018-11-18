@@ -51,11 +51,11 @@ int run_path(shell_t *, char *);
 int check_slash(char *);
 
 /* string.c */
-size_t _strlen(char *);
+size_t _strlen(const char *);
 char *_strdup(char *);
 char **tokenize_str(char *, char *);
 int _strcmp(char *, char *);
-char *str_concat_delim(char *, char *, char *);
+char *str_concat_delim(const char *, const char *, const char *);
 
 /* prompt_util.c */
 void print_ps1(void);
@@ -63,11 +63,11 @@ char *find_pathname(char **, char *);
 char *_getenv(const char *);
 char *make_pathname(char *, char *);
 char **get_path(char **);
-
+char **_getenv_ptr(const char *);
 /* prompt_util2.c */
 void free_shell_t(shell_t *);
 void p_commanderr(char *, char *);
-int setenv(const char *, const char *, int);
+int _setenv(const char *, const char *, int);
 
 /* buildin.c */
 void my_exit(shell_t *);

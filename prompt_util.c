@@ -140,6 +140,23 @@ char *make_pathname(char *path, char *file)
   */
 char *_getenv(const char *name)
 {
+	unsigned int j;
+	char **var = _getenv_ptr(name);
+	
+	if (var && *var)
+	{
+		for (j = 0; (*var)[j] != '=' && (*var)[j] == name[j] && name[j]; j++)
+			;
+		if ((*var)[j] == '=' && name[j] == '\0')
+			return (&(*var)[++j]);
+	}
+	return (NULL);
+}
+
+
+
+char **_getenv_ptr(const char *name)
+{
 	unsigned int i, j;
 
 	for (i = 0; environ[i] != NULL; i++)
@@ -147,7 +164,7 @@ char *_getenv(const char *name)
 		for (j = 0; environ[i][j] != '=' && environ[i][j] == name[j] && name[j]; j++)
 			;
 		if (environ[i][j] == '=' && name[j] == '\0')
-			return (&environ[i][++j]);
+			return (&environ[i]);
 	}
 	return (NULL);
 }

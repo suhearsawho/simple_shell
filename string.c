@@ -6,13 +6,12 @@
   * @str: string
   * Return: number of string
   */
-size_t _strlen(char *str)
+size_t _strlen(const char *str)
 {
-	char *s = str;
 	size_t num_char;
 
 	num_char = 0;
-	while (*s++ != '\0')
+	while (str[num_char] != '\0')
 		num_char++;
 	return (num_char);
 }
@@ -114,7 +113,7 @@ char **tokenize_str(char *str, char *delim)
  * @delim: the delimiter to use.
  * Return: Pointer to concatenated string.
  */
-char *str_concat_dilem(char *s1, char *s2, char *delim)
+char *str_concat_delim(const char *s1, const char *s2, const char *delim)
 {
 	int a, b, c, d;
 	char *str;
@@ -122,7 +121,6 @@ char *str_concat_dilem(char *s1, char *s2, char *delim)
 	a = _strlen(s1);
 	b = _strlen(s2);
 	d = _strlen(delim);
-
 	str = malloc(sizeof(char) * (a + b + d + 1));
 	if (!str)
 		return (NULL);
@@ -131,11 +129,10 @@ char *str_concat_dilem(char *s1, char *s2, char *delim)
 	{
 		if (c < a)
 			str[c] = s1[c];
-		else if (c < d)
+		else if (c < a + d)
 			str[c] = delim[c - a];
 		else
 			str[c] = s2[c - a - d];
-
 		c++;
 	}
 	str[c] = 0;

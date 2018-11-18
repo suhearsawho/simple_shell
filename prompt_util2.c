@@ -1,5 +1,25 @@
 #include "shell.h"
 
+
+void change_env(char **env, char *new_env)
+{
+	size_t env_size = 0;
+	
+	while (environ[env_size])
+		env_size++;
+	env_size++;
+	
+	if (!env)
+	{
+		_realloc(environ, sizeof(char *) * env_size,
+				sizeof(char *) * (env_size + 1));
+		environ[env_size + 1] = new_env;
+	}
+	else if (env)
+		*env = new_env;
+	printf("1 : %s\n", new_env);
+	printf("2 : %s\n", *_getenv_ptr("MAR"));
+}
 /**
   * free_shell_t - frees elements in shell_t struct
   * @shell_ptrs: structure of malloced elements
@@ -46,30 +66,28 @@ void p_commanderr(char *command, char *filename)
  *
  * Return: 0 on success, or -1 on error.
  */
-int setenv(const char *name, const char *value, int overwrite)
+int _setenv(const char *name, const char *value, int overwrite)
 {
-	char **old_env, **new_env;
-	char *new_value, *env, *delim = "=";
-	size_t env_size = 0;
+	char *new_env, **env, *delim = "=";
+	if (!name)
+		return (-1);
 
-	while (environ[env_size])
-		env_size++;
-	env_size++;
+	env = _getenv_ptr(name);
 
-	env = _getenv(name);
 	if (!env && !overwrite)
 		return (-1);
 	else if (env && !overwrite)
 		return (0);
 
-	new_value = str_concat_delim(name, value, delim);
-
+	new_env = str_concat_delim(name, value, delim);
 	if (!env)
-		_realloc(environ, sizeof(char *) * env_size,
-				sizeof(char *) * (env_size + 1);
-		environ[env_size + 1] = new_value;
+		change_env(env, new_env);
 	else if (env)
-		env = new_value;
+		change_env(env, new_env);
 
 	return (0);
 }
+
+
+
+
