@@ -14,6 +14,7 @@ extern char **environ;
 #include <string.h>
 #include <dirent.h>
 #include <errno.h>
+#include <signal.h>
 
 /**
  * struct shell_env - stores address for pointer to free.

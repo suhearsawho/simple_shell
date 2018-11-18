@@ -21,6 +21,7 @@ int main(int argc, char *argv[], char *envp[])
 	print_ps1();
 	shell_ptrs.modify_path = modify_path;
 	shell_ptrs.path_values = path_values;
+	signal(SIGINT, SIG_IGN);
 	while ((getline_stat = getline(&input, &n_input, stdin)) != -1)
 	{
 		shell_ptrs.input = input;
