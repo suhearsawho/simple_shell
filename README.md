@@ -1,5 +1,5 @@
 # 0x15. C - Simple Shell 
-## Masu Shell
+## Marsu Shell
 <p align="center"><img src ="https://petco.scene7.com/is/image/PETCO/849430-center-3?$ProductDetail-large$" /></p>
 
 ## Authors
@@ -29,7 +29,7 @@ Including our abilities to write a program in "C" this project is also meant to 
 
 ### Basic usage
 
-using masu shell in interactive mode.
+using marsu shell in interactive mode.
 ```
 user@ubuntu:~ $ ./masu 
 masu:~ $
@@ -51,6 +51,9 @@ user@ubuntu:~ $
 
 ---
 ## Description
+
+The Masu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
+In the interactive mode, commands are taken from the terminal. In the non-interactive mode, commands are piped from a file.
 
 
 <details>
@@ -96,12 +99,12 @@ user@ubuntu:~ $
 ## Features
 
 ### Advance task
-- [ ] [Handle Ctrl+C](https://github.com/suhearsawho/simple_shell/issues/7)
+- [X] [Handle Ctrl+C](https://github.com/suhearsawho/simple_shell/issues/7)
 - [ ] [impl cd](https://github.com/suhearsawho/simple_shell/issues/6)
 - [ ] [setenv](https://github.com/suhearsawho/simple_shell/issues/5)
 - [ ] [unsetenv](https://github.com/suhearsawho/simple_shell/issues/5)
 - [ ] [getline](https://github.com/suhearsawho/simple_shell/issues/3)
-- [ ] [strtok](https://github.com/suhearsawho/simple_shell/issues/4)
+- [X] [strtok](https://github.com/suhearsawho/simple_shell/issues/4)
 
 
 [_page top_](#0x15-c---simple-shell)
@@ -116,10 +119,10 @@ Files | Description
 [shell.h](./file) | header file for the shell containing all the prototypes for the shell.
 [prompt_util.c](./prompt_util.c) | Functions that that directly related to the shell basic functionality.
 [string.c](./string.c) | Functions that are for related to processing strings for the shell.
+[_strtok.c](./_strtok.c) | Susan's implementation of a function that tokenizes a string, `strtok()`
 [file](./file) | me
 [file](./file) | me
 [file](./file) | me
-[_strtok.c](./_strtok.c) | TODO
 [_getline.c](./_getline.c) | TODO
   
 
