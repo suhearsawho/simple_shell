@@ -1,13 +1,16 @@
-.TH Masu 1 "20 November 2018" "Masu man page"
+
+.TH Marsu 1 "20 November 2018" "Marsu man page"
 
 .SH NAME
-Masu - A Shell program produced by Susan Su and Martin Smith
+Marsu - A Shell program produced by Susan Su and Martin Smith
 
 .SH SYNOPSIS
 .B /vagrant/simple_shell/Marsu
 
 .SH DESCRIPTION
-The Masu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
+
+The Marsu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
+
 In the interactive mode, commands are taken from the terminal. In the non-interactive mode, commands are piped from a file.
 
 .SH INVOCATION

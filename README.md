@@ -29,20 +29,19 @@ Including our abilities to write a program in "C" this project is also meant to 
 
 ### Basic usage
 
-using marsu shell in interactive mode.
+using Marsu shell in interactive mode.
 ```
-user@ubuntu:~ $ ./masu 
-masu:~ $
-masu:~ $ ls -a
+user@ubuntu:~ $ ./Marsu 
+Marsu:~ $
+Marsu:~ $ ls -a
 .   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
 ..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
-masu@:~ $ cd work
-masu@:~/work $ 
+Marsu@:~ $ 
 ```
 
-using masu shell in non-interactive.
+using Marsu shell in non-interactive.
 ```
-user@ubuntu:~ $ echo "/bin/ls -a" | ./masu
+user@ubuntu:~ $ echo "/bin/ls -a" | ./Marsu
 .   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
 ..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
 user@ubuntu:~ $ 
@@ -52,9 +51,9 @@ user@ubuntu:~ $
 ---
 ## Description
 
-The Masu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
+Marsu gets its name from the of the collaborators **MAR**tin and **SU**san is so happens to also be the Finnish for guinea pig :lol:
+The Marsu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
 In the interactive mode, commands are taken from the terminal. In the non-interactive mode, commands are piped from a file.
-
 
 <details>
 <summary>List of allowed functions and system calls</summary>
@@ -100,11 +99,11 @@ In the interactive mode, commands are taken from the terminal. In the non-intera
 
 ### Advance task
 - [X] [Handle Ctrl+C](https://github.com/suhearsawho/simple_shell/issues/7)
+- [X] [strtok](https://github.com/suhearsawho/simple_shell/issues/4)
 - [ ] [impl cd](https://github.com/suhearsawho/simple_shell/issues/6)
 - [ ] [setenv](https://github.com/suhearsawho/simple_shell/issues/5)
 - [ ] [unsetenv](https://github.com/suhearsawho/simple_shell/issues/5)
 - [ ] [getline](https://github.com/suhearsawho/simple_shell/issues/3)
-- [X] [strtok](https://github.com/suhearsawho/simple_shell/issues/4)
 
 
 [_page top_](#0x15-c---simple-shell)
@@ -114,15 +113,13 @@ In the interactive mode, commands are taken from the terminal. In the non-intera
 ## Modules
 
 Files | Description
---- | ---
-[main.c](./main.c) | Main entry point for the masu shell.
+---: | ---
+[main.c](./main.c) | Main entry point for the Marsu shell.
 [shell.h](./file) | header file for the shell containing all the prototypes for the shell.
 [prompt_util.c](./prompt_util.c) | Functions that that directly related to the shell basic functionality.
-[string.c](./string.c) | Functions that are for related to processing strings for the shell.
-[_strtok.c](./_strtok.c) | Susan's implementation of a function that tokenizes a string, `strtok()`
-[file](./file) | me
-[file](./file) | me
-[file](./file) | me
+[prompt_util2.c](./prompt_util2.c) | More Functions that that directly related to the shell basic functionality.
+[buildin.c](./buildin.c) | Source for commands that are built into the shell.
+[strtok.c](./strtok.c) | Susan's implementation of a function that tokenize a string, `strtok()`
 [_getline.c](./_getline.c) | TODO
   
 
