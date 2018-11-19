@@ -27,7 +27,7 @@ void my_exit(shell_t *ptrs)
   */
 void print_env(shell_t *ptrs)
 {
-	unsigned int i, j;
+	unsigned int i;
 	char newline = '\n';
 
 	(void)ptrs;
@@ -35,10 +35,7 @@ void print_env(shell_t *ptrs)
 		return;
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		j = 0;
-		while (environ[i][j] != '\0')
-			j++;
-		write(STDOUT_FILENO, environ[i], j);
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, &newline, 1);
 	}
 	errno = 0;
