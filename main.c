@@ -73,7 +73,7 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 	char **path = shell_ptrs->path_values;
 	char *input_org;
 	int status;
-	
+
 	if (input_token[0] != NULL)
 	{
 		child_pid = fork();
