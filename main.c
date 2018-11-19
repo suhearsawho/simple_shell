@@ -89,7 +89,7 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 			}
 			else
 			{
-			/*	errno = 127;   */
+				errno = 127;
 				p_commanderr(input_org, filename);
 			}
 			free_shell_t(shell_ptrs);
