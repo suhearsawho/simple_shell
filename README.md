@@ -29,19 +29,19 @@ Including our abilities to write a program in "C" this project is also meant to 
 
 ### Basic usage
 
-using marsu shell in interactive mode.
+using Marsu shell in interactive mode.
 ```
-user@ubuntu:~ $ ./marsu 
-marsu:~ $
-marsu:~ $ ls -a
+user@ubuntu:~ $ ./Marsu 
+Marsu:~ $
+Marsu:~ $ ls -a
 .   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
 ..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
-marsu@:~ $ 
+Marsu@:~ $ 
 ```
 
-using marsu shell in non-interactive.
+using Marsu shell in non-interactive.
 ```
-user@ubuntu:~ $ echo "/bin/ls -a" | ./marsu
+user@ubuntu:~ $ echo "/bin/ls -a" | ./Marsu
 .   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
 ..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
 user@ubuntu:~ $ 
@@ -51,8 +51,8 @@ user@ubuntu:~ $
 ---
 ## Description
 
-marsu gets its name for the of the collaberators **MAR**tin and **SU**san is so happens to also be the Finnish for guinea pig :lol:
-The marsu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
+Marsu gets its name from the of the collaborators **MAR**tin and **SU**san is so happens to also be the Finnish for guinea pig :lol:
+The Marsu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
 In the interactive mode, commands are taken from the terminal. In the non-interactive mode, commands are piped from a file.
 
 <details>
@@ -114,7 +114,7 @@ In the interactive mode, commands are taken from the terminal. In the non-intera
 
 Files | Description
 ---: | ---
-[main.c](./main.c) | Main entry point for the marsu shell.
+[main.c](./main.c) | Main entry point for the Marsu shell.
 [shell.h](./file) | header file for the shell containing all the prototypes for the shell.
 [prompt_util.c](./prompt_util.c) | Functions that that directly related to the shell basic functionality.
 [prompt_util2.c](./prompt_util2.c) | More Functions that that directly related to the shell basic functionality.
