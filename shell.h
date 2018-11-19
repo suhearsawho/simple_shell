@@ -59,7 +59,7 @@ char **tokenize_str(char *, char *);
 int _strcmp(char *, char *);
 
 /* prompt_util.c */
-void print_ps1(void);
+void print_ps1(int);
 char *find_pathname(char **, char *);
 char *_getenv(const char *);
 char *make_pathname(char *, char *);
