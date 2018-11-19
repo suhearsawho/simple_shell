@@ -83,7 +83,10 @@ char *find_pathname(char **path, char *input)
 	{
 		directory = opendir(path[i]);
 		if (directory == NULL)
+		{
+			errno = EBADF;
 			return (NULL);
+		}
 		while ((filename = readdir(directory)) != NULL)
 		{
 			/* TODO make strcmp function */
