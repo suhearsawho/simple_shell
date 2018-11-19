@@ -73,7 +73,7 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 	char **path = shell_ptrs->path_values;
 	char *input_org;
 	int status;
-
+	
 	if (input_token[0] != NULL)
 	{
 		child_pid = fork();
@@ -106,6 +106,7 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 /**
  * run_build_in - checks if the the user calls a built-in cmd.
  * @ptrs: contains all the malloced spaces.
+ * @filename: name of the file
  * Return: 1 for match not found, 0 for match found.
  */
 int run_build_in(shell_t *ptrs, char *filename)
@@ -119,6 +120,7 @@ int run_build_in(shell_t *ptrs, char *filename)
 		{NULL, NULL},
 	};
 
+	(void)filename;
 	if (!ptrs)
 		return (1);
 	if (!(ptrs->input_token[0]))
@@ -133,11 +135,6 @@ int run_build_in(shell_t *ptrs, char *filename)
 	{
 		if (!_strcmp(ptrs->input_token[0], cmd[index].cmd_name))
 		{
-			if (index == 1 && num_words > 1)
-			{
-				run_path(ptrs, filename);
-				return (1);
-			}
 			(cmd[index].cmd)(ptrs);
 			return (0);
 		}
