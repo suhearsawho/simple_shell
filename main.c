@@ -99,7 +99,10 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 		else
 			wait(&status);
 	}
-	errno = status % 255;
+	if (status > 255)
+		errno = status % 255;
+	else
+		errno = status;
 	return (errno);
 }
 
@@ -165,5 +168,9 @@ int run_path(shell_t *shell_ptrs, char *filename)
 	}
 	else
 		wait(&status);
+	if (status > 255)
+		errno = status % 255;
+	else
+		errno = status;
 	return (errno);
 }
