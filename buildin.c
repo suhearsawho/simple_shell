@@ -11,15 +11,15 @@ void my_exit(shell_t *ptrs)
 	char *exit_str;
 
 	exit_str = ptrs->input_token[1];
-	exit_status = 130;
+	errno = 130;
 	if (exit_str != NULL)
 	{
-		exit_status = 0;
+		errno = 0;
 		for (i = 0; exit_str[i] != '\0'; i++)
-			exit_status = exit_status * 10 + (exit_str[i] - '0');
+			errno = errno * 10 + (exit_str[i] - '0');
 	}
 	free_shell_t(ptrs);
-	exit(exit_status);
+	exit(errno);
 }
 
 /**
@@ -33,4 +33,5 @@ void print_env(shell_t *ptrs)
 	(void)ptrs;
 	for (i = 0; environ[i] != NULL; i++)
 		printf("%s\n", environ[i]);
+	errno = 0;
 }
