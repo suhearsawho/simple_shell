@@ -10,7 +10,7 @@ size_t _strlen(char *str)
 {
 	char *s = str;
 	size_t num_char;
-	
+
 	num_char = 0;
 	if (str == NULL)
 		return (num_char);
