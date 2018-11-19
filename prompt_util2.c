@@ -11,14 +11,10 @@ void change_env(char **env, char *new_env)
 	
 	if (!env)
 	{
-		_realloc(environ, sizeof(char *) * env_size,
-				sizeof(char *) * (env_size + 1));
-		environ[env_size + 1] = new_env;
+		environ = _environ_add(new_env);
 	}
 	else if (env)
 		*env = new_env;
-	printf("1 : %s\n", new_env);
-	printf("2 : %s\n", *_getenv_ptr("MAR"));
 }
 /**
   * free_shell_t - frees elements in shell_t struct

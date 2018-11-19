@@ -79,5 +79,5 @@ ssize_t getline(char **, size_t *, FILE *);
 
 /* mem_manage.c */
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
-
+char **_environ_add(char *);
 #endif
