@@ -10,8 +10,7 @@ void my_exit(shell_t *ptrs)
 	char *exit_str;
 
 	exit_str = ptrs->input_token[1];
-	errno = 130;
-	if (exit_str != NULL)
+	if (exit_str != NULL || ptrs == NULL)
 	{
 		errno = 0;
 		for (i = 0; exit_str[i] != '\0'; i++)
