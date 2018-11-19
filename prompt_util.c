@@ -104,9 +104,12 @@ char *find_pathname(char **path, char *input)
 	if (match_found == 1)
 	{
 		result = make_pathname(path[i], input);
+		if (access(result, R_OK) != -1)
+			errno = EACCES;
 		closedir(directory);
 		return (result);
 	}
+	errno = EBADF;
 	return (NULL);
 }
 
