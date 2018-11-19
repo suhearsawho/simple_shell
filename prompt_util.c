@@ -2,16 +2,22 @@
 
 /**
   * print_ps1 - prints the primary shell prompt
+  * @num: number that determines which errno value should be set
   */
-void print_ps1(void)
+void print_ps1(int num)
 {
 	char ps1[] = "MARSU$ ";
 	size_t len_ps1;
+	int org_error;
 
+	org_error = errno;
 	len_ps1 = _strlen(ps1);
 	if (isatty(0))
 		write(STDOUT_FILENO, ps1, len_ps1);
-	errno = 0;
+	if (num == 0)
+		errno = 0;
+	else
+		errno = org_error;
 }
 
 /**

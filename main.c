@@ -18,7 +18,7 @@ int main(int argc, char *argv[], char *envp[])
 	(void)argc;
 	input = NULL;
 	path_values = get_path(&modify_path);
-	print_ps1();
+	print_ps1(0);
 	shell_ptrs.modify_path = modify_path;
 	shell_ptrs.path_values = path_values;
 	signal(SIGINT, SIG_IGN);
@@ -35,7 +35,7 @@ int main(int argc, char *argv[], char *envp[])
 				run_command(&shell_ptrs, argv[0], envp);
 		}
 		free(input_token);
-		print_ps1();
+		print_ps1(1);
 	}
 	free(modify_path);
 	free(path_values);
@@ -94,12 +94,12 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 			}
 			free_shell_t(shell_ptrs);
 			free(input_org);
-			/* _exit(130); */
 			_exit(errno);
 		}
 		else
 			wait(&status);
 	}
+	errno = status % 255;
 	return (errno);
 }
 
