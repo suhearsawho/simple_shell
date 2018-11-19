@@ -40,7 +40,7 @@ int main(int argc, char *argv[], char *envp[])
 	free(modify_path);
 	free(path_values);
 	free(input);
-	return (0);
+	return (errno);
 }
 
 /**

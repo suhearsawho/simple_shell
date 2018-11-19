@@ -11,6 +11,7 @@ void print_ps1(void)
 	len_ps1 = _strlen(ps1);
 	if (isatty(0))
 		write(STDOUT_FILENO, ps1, len_ps1);
+	errno = 0;
 }
 
 /**
