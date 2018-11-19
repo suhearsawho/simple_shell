@@ -6,7 +6,6 @@
  */
 void my_exit(shell_t *ptrs)
 {
-	int exit_status;
 	unsigned int i;
 	char *exit_str;
 

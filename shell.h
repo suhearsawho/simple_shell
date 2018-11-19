@@ -21,6 +21,7 @@ extern char **environ;
  * @path_values: pointer to path values
  * @input: pointer to buffer that getline creates.
  * @input_token: pointers for input token.
+ * @modify_path: pointer to the path after it has been modified
  *
  * Description: provides a storage for all elements that are malloced.
  */
