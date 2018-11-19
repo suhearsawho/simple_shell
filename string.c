@@ -12,6 +12,8 @@ size_t _strlen(char *str)
 	size_t num_char;
 
 	num_char = 0;
+	if (str == NULL)
+		return (num_char);
 	while (*s++ != '\0')
 		num_char++;
 	return (num_char);

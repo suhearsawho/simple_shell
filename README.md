@@ -119,7 +119,6 @@ Files | Description
 [prompt_util.c](./prompt_util.c) | Functions that that directly related to the shell basic functionality.
 [prompt_util2.c](./prompt_util2.c) | More Functions that that directly related to the shell basic functionality.
 [buildin.c](./buildin.c) | Source for commands that are built into the shell.
-[string.c](./string.c) | Source for functions that are for related to processing strings for the shell.
 [strtok.c](./strtok.c) | Susan's implementation of a function that tokenize a string, `strtok()`
 [_getline.c](./_getline.c) | TODO
   
