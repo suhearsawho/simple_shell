@@ -49,9 +49,10 @@ The env builtin prints all environment variables in the current shell. Each elem
 .RE
 
 .SH EXIT STATUS
-
+The exit status of an executed command is determined by the waitpid system call or the errno, a global variable. 
 
 .SH SIGNALS
+The Marsu shell is set to ignore (SIG_IGN) the SIGINT (Ctrl-C) signal. The Marsu shell will exit if exit is typed into the terminal or if the EOF (Ctrl-D) is reached. 
 
 .SH EXAMPLES
 
