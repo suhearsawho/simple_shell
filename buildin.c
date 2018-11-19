@@ -29,10 +29,12 @@ void print_env(shell_t *ptrs)
 {
 	unsigned int i;
 	char newline = '\n';
+
 	(void)ptrs;
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, &newline, 1);
 	}
+	errno = 0;
 }

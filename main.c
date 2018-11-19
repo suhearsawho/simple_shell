@@ -31,7 +31,7 @@ int main(int argc, char *argv[], char *envp[])
 			run_path(&shell_ptrs, argv[0]);
 		else if (input_token[0] && check_slash(input_token[0]) == 0)
 		{
-			if (run_build_in(&shell_ptrs) == 1)
+			if (run_build_in(&shell_ptrs, argv[0]) == 1)
 				run_command(&shell_ptrs, argv[0], envp);
 		}
 		free(input_token);
@@ -108,10 +108,11 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
  * @ptrs: contains all the malloced spaces.
  * Return: 1 for match not found, 0 for match found.
  */
-int run_build_in(shell_t *ptrs)
+int run_build_in(shell_t *ptrs, char *filename)
 {
 	size_t index;
-
+	unsigned int num_words;
+	char **input_words;
 	built_t cmd[] = {
 		{"exit", my_exit},
 		{"env", print_env},
@@ -123,11 +124,20 @@ int run_build_in(shell_t *ptrs)
 	if (!(ptrs->input_token[0]))
 		return (1);
 
+	input_words = ptrs->input_token;
+	num_words = 0;
+	while (input_words[num_words] != NULL)
+		num_words++;
 	index = 0;
 	while (cmd[index].cmd_name)
 	{
 		if (!_strcmp(ptrs->input_token[0], cmd[index].cmd_name))
 		{
+			if (index == 1 && num_words > 1)
+			{
+				run_path(ptrs, filename);
+				return (1);
+			}
 			(cmd[index].cmd)(ptrs);
 			return (0);
 		}
