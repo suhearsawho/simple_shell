@@ -61,3 +61,20 @@ The Marsu shell is set to ignore (SIG_IGN) the SIGINT (Ctrl-C) signal. The Marsu
 
 .SH EXAMPLES
 
+using Marsu shell in interactive mode.
+
+user@ubuntu:~ $ ./Marsu 
+Marsu:~ $
+Marsu:~ $ ls -a
+.   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
+..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
+Marsu@:~ $ 
+
+using Marsu shell in non-interactive.
+
+user@ubuntu:~ $ echo "/bin/ls -a" | ./Marsu
+.   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
+..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
+user@ubuntu:~ $ 
+
+
