@@ -51,7 +51,7 @@ user@ubuntu:~ $
 ---
 ## Description
 
-Marsu gets its name from the of the collaborators **MAR**tin and **SU**san is so happens to also be the Finnish for guinea pig :lol:
+Marsu gets its name from the of the collaborators **MAR**tin and **SU**san is so happens to also be the Finnish for guinea pig 😹.
 The Marsu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
 In the interactive mode, commands are taken from the terminal. In the non-interactive mode, commands are piped from a file.
 
