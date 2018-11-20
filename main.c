@@ -18,9 +18,10 @@ int main(int argc, char *argv[], char *envp[])
 	(void)argc;
 	input = NULL;
 	path_values = get_path(&modify_path);
-	print_ps1();
+	print_ps1(0);
 	shell_ptrs.modify_path = modify_path;
 	shell_ptrs.path_values = path_values;
+	signal(SIGINT, SIG_IGN);
 	while ((getline_stat = getline(&input, &n_input, stdin)) != -1)
 	{
 		shell_ptrs.input = input;
@@ -30,16 +31,16 @@ int main(int argc, char *argv[], char *envp[])
 			run_path(&shell_ptrs, argv[0]);
 		else if (input_token[0] && check_slash(input_token[0]) == 0)
 		{
-			if (run_build_in(&shell_ptrs) == 1)
+			if (run_build_in(&shell_ptrs, argv[0]) == 1)
 				run_command(&shell_ptrs, argv[0], envp);
 		}
 		free(input_token);
-		print_ps1();
+		print_ps1(1);
 	}
 	free(modify_path);
 	free(path_values);
 	free(input);
-	return (0);
+	return (errno);
 }
 
 /**
@@ -93,35 +94,42 @@ int run_command(shell_t *shell_ptrs, char *filename, char **envp)
 			}
 			free_shell_t(shell_ptrs);
 			free(input_org);
-			/* _exit(130); */
 			_exit(errno);
 		}
 		else
 			wait(&status);
 	}
+	errno = status % 255;
 	return (errno);
 }
 
 /**
  * run_build_in - checks if the the user calls a built-in cmd.
  * @ptrs: contains all the malloced spaces.
+ * @filename: name of the file
  * Return: 1 for match not found, 0 for match found.
  */
-int run_build_in(shell_t *ptrs)
+int run_build_in(shell_t *ptrs, char *filename)
 {
 	size_t index;
-
+	unsigned int num_words;
+	char **input_words;
 	built_t cmd[] = {
 		{"exit", my_exit},
 		{"env", print_env},
 		{NULL, NULL},
 	};
 
+	(void)filename;
 	if (!ptrs)
 		return (1);
 	if (!(ptrs->input_token[0]))
 		return (1);
 
+	input_words = ptrs->input_token;
+	num_words = 0;
+	while (input_words[num_words] != NULL)
+		num_words++;
 	index = 0;
 	while (cmd[index].cmd_name)
 	{
@@ -157,5 +165,6 @@ int run_path(shell_t *shell_ptrs, char *filename)
 	}
 	else
 		wait(&status);
+	errno = status % 255;
 	return (errno);
 }

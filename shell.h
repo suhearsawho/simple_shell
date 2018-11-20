@@ -14,12 +14,14 @@ extern char **environ;
 #include <string.h>
 #include <dirent.h>
 #include <errno.h>
+#include <signal.h>
 
 /**
  * struct shell_env - stores address for pointer to free.
  * @path_values: pointer to path values
  * @input: pointer to buffer that getline creates.
  * @input_token: pointers for input token.
+ * @modify_path: pointer to the path after it has been modified
  *
  * Description: provides a storage for all elements that are malloced.
  */
@@ -45,7 +47,7 @@ typedef struct built_in_cmd
 } built_t;
 
 /* main.c */
-int run_build_in(shell_t *);
+int run_build_in(shell_t *, char *);
 int run_command(shell_t *, char *, char **);
 int run_path(shell_t *, char *);
 int check_slash(char *);
@@ -57,7 +59,7 @@ char **tokenize_str(char *, char *);
 int _strcmp(char *, char *);
 
 /* prompt_util.c */
-void print_ps1(void);
+void print_ps1(int);
 char *find_pathname(char **, char *);
 char *_getenv(const char *);
 char *make_pathname(char *, char *);

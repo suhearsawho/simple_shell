@@ -2,15 +2,22 @@
 
 /**
   * print_ps1 - prints the primary shell prompt
+  * @num: number that determines which errno value should be set
   */
-void print_ps1(void)
+void print_ps1(int num)
 {
 	char ps1[] = "MARSU$ ";
 	size_t len_ps1;
+	int org_error;
 
+	org_error = errno;
 	len_ps1 = _strlen(ps1);
 	if (isatty(0))
 		write(STDOUT_FILENO, ps1, len_ps1);
+	if (num == 0)
+		errno = 0;
+	else
+		errno = org_error;
 }
 
 /**
@@ -83,7 +90,10 @@ char *find_pathname(char **path, char *input)
 	{
 		directory = opendir(path[i]);
 		if (directory == NULL)
+		{
+			errno = EBADF;
 			return (NULL);
+		}
 		while ((filename = readdir(directory)) != NULL)
 		{
 			/* TODO make strcmp function */
@@ -101,9 +111,12 @@ char *find_pathname(char **path, char *input)
 	if (match_found == 1)
 	{
 		result = make_pathname(path[i], input);
+		if (access(result, R_OK) != -1)
+			errno = EACCES;
 		closedir(directory);
 		return (result);
 	}
+	errno = EBADF;
 	return (NULL);
 }
 

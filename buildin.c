@@ -6,20 +6,20 @@
  */
 void my_exit(shell_t *ptrs)
 {
-	int exit_status;
 	unsigned int i;
 	char *exit_str;
 
 	exit_str = ptrs->input_token[1];
-	exit_status = 130;
-	if (exit_str != NULL)
+	if (exit_str != NULL || ptrs == NULL)
 	{
-		exit_status = 0;
+		errno = 0;
 		for (i = 0; exit_str[i] != '\0'; i++)
-			exit_status = exit_status * 10 + (exit_str[i] - '0');
+			errno = errno * 10 + (exit_str[i] - '0');
 	}
 	free_shell_t(ptrs);
-	exit(exit_status);
+	if (errno > 255)
+		errno %= 256;
+	exit(errno);
 }
 
 /**
@@ -28,9 +28,20 @@ void my_exit(shell_t *ptrs)
   */
 void print_env(shell_t *ptrs)
 {
-	unsigned int i;
+	unsigned int i, k;
+	char newline = '\n';
 
 	(void)ptrs;
+	if (environ == NULL)
+		return;
 	for (i = 0; environ[i] != NULL; i++)
-		printf("%s\n", environ[i]);
+	{
+		k = _strlen(environ[i]);
+		if (k != 0)
+		{
+			write(STDOUT_FILENO, environ[i], k);
+			write(STDOUT_FILENO, &newline, 1);
+		}
+	}
+	errno = 0;
 }

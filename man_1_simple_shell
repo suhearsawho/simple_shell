@@ -1,0 +1,78 @@
+
+.TH Marsu 1 "20 November 2018" "Marsu man page"
+
+.SH NAME
+Marsu - A Shell program produced by Susan Su and Martin Smith
+
+.SH SYNOPSIS
+.B /vagrant/simple_shell/Marsu
+
+.SH DESCRIPTION
+
+The Marsu Shell takes user input in two modes - interactive and non-interactive - and performs the proper course of action. 
+
+In the interactive mode, commands are taken from the terminal. In the non-interactive mode, commands are piped from a file.
+
+.SH INVOCATION
+When an interactive shell is initiated, then the PS1 variable is set and a $ will follow to indicate where the user should type in commands. 
+
+.SH SHELL GRAMMAR
+.RS 1
+.LP
+.B Simple Commands
+.RS 2 
+A simple command is a sequence of words and operators that are delimited by spaces and terminated by a control operator. The first word corresponds to the command that is to be executed and the subsequent words are used as arguments to the command. 
+Upon execution, the simple command returns the exit status.
+
+.SH TOKENIZATION AND EXPANSION
+When a user types a series of words onto the terminal, the incoming word is saved as a string that is terminated by the newline and null character. The string is tokenized into a series of words by defining spaces, newline, tab, and escape characters as the delimiters. Each word is stored into an array of character strings. 
+
+.SH ALIASES
+When the first word of a tokenized string corresponds to an alias, the word is substituted for the value of the alias. Aliases cannot be created within the current version of the Marsu shell. 
+
+.SH COMMAND EXECUTION
+After tokenization, the simple command has been split into words that are placed into an array of character strings. 
+
+If the first word of the tokenized string contains any slashes, then the Marsu shell will attempt to execute the command with the execve system call. Subsequent words, or arguments will be fed into the execve system call. If execve fails and returns -1, then an error message determined by the perror routine will be printed onto the standard error output. If execve is successful, then no error message will be printed and a 0, signifying success, will be returned. 
+
+If the first word of the tokenized string contains no slashes, then the Marsu shell will attempt to locate the command. 
+
+First, the command will be compared to a list of builtins in the Marsu shell. Further description of the builtin commands available in the current version of the Marsu shell will be detailed in the BUILTINS section of this man page. If the command name corresponds to a builtin, then the code associated with the builtin will be executed within the shell. 
+
+Second, if the command does not match any Marsu shell builtins, then the command will be searched for by looking at commands in the PATH. The PATH is an environment variable that contains a list of colon-delimited directories. The files of all elements in the directory are scanned through until a match is found. If a match is found, then the executable file corresponding to the command will be executed. 
+
+If the first word of the tokenized string does not correspond to any builtin or command in the PATH, then an error message will be printed onto the standard error output. 
+
+.SH BUILTINS
+.RS 1
+.LP
+.B env
+.RS 2
+The env builtin prints all environment variables in the current shell. Each element is separated by a newline. 
+.RE
+
+.SH EXIT STATUS
+The exit status of an executed command is determined by the waitpid system call or the errno, a global variable. 
+
+.SH SIGNALS
+The Marsu shell is set to ignore (SIG_IGN) the SIGINT (Ctrl-C) signal. The Marsu shell will exit if exit is typed into the terminal or if the EOF (Ctrl-D) is reached. 
+
+.SH EXAMPLES
+
+using Marsu shell in interactive mode.
+
+user@ubuntu:~ $ ./Marsu 
+Marsu:~ $
+Marsu:~ $ ls -a
+.   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
+..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
+Marsu@:~ $ 
+
+using Marsu shell in non-interactive.
+
+user@ubuntu:~ $ echo "/bin/ls -a" | ./Marsu
+.   .bash_history  .bashrc     .lesshst  .profile  .sudo_as_admin_successful  .viminfo  Betty     work
+..  .bash_logout   .gitconfig  .local    .ssh      .test_file.swp             .vimrc    dotfiles
+user@ubuntu:~ $ 
+
+
