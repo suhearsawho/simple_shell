@@ -5,7 +5,9 @@
 Marsu - A Shell program produced by Susan Su and Martin Smith
 
 .SH SYNOPSIS
-.B /vagrant/simple_shell/Marsu
+.B Interactive Mode - /vagrant/simple_shell/Marsu
+.LP
+.B Non-Interactive Mode - echo "insert_command_here" | /vagrant/simple_shell/Marsu
 
 .SH DESCRIPTION
 
